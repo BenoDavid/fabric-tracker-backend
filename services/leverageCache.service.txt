@@ -1,0 +1,47 @@
+'use strict';
+
+const { STIPCLeverageConfig } = require('../models').sequelizeDb2.models;
+
+let leverageCache = null;
+
+/**
+ * Load leverage rules from DB into memory
+ */
+async function loadLeverageCache() {
+    const rows = await STIPCLeverageConfig.findAll({
+        where: { isActive: true }
+    });
+
+    leverageCache = {};
+    rows.forEach(row => {
+        const key = `${row.fabricType}_${row.sampleType}_${row.smvType}_${row.planType}`;
+        leverageCache[key] = row.leverage;
+    });
+
+    return leverageCache;
+}
+
+/**
+ * Get leverage from cache, optionally reload if cache is empty
+ */
+async function getLeverage(fabricType, sampleType, smvType, planType) {
+    if (!leverageCache) {
+        await loadLeverageCache();
+    }
+
+    const key = `${fabricType}_${sampleType}_${smvType}_${planType}`;
+    return leverageCache[key] ?? 0;
+}
+
+/**
+ * Clear cache (force reload next time)
+ */
+function clearLeverageCache() {
+    leverageCache = null;
+}
+
+module.exports = {
+    getLeverage,
+    clearLeverageCache,
+    loadLeverageCache
+};
