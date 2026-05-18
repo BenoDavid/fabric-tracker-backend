@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     mainFabricCoo: DataTypes.STRING,
     mainFabricType: DataTypes.STRING,
     mainFabricContent: DataTypes.TEXT,
+    fabricType: DataTypes.STRING,
     fabricWeight: DataTypes.STRING,
     styleVendor: DataTypes.STRING,
-    stockNbr: DataTypes.STRING,
     productDescription: DataTypes.TEXT,
     plannedColor: DataTypes.STRING,
     orderQty: DataTypes.DECIMAL(10, 2),
@@ -63,12 +63,24 @@ module.exports = (sequelize, DataTypes) => {
     fabricTcResult: DataTypes.STRING,
 
     mainFabricMillCode: DataTypes.STRING,
-    remarks: DataTypes.TEXT,
+    madRemarks: DataTypes.TEXT,
+    bulkRemarks: DataTypes.TEXT,
+    complianceRemarks: DataTypes.TEXT,
+    pdRemarks: DataTypes.TEXT,
+    madEntryBy: DataTypes.STRING,
+    madTimestamp: DataTypes.DATE,
+    bulkEntryBy: DataTypes.STRING,
+    bulkTimestamp: DataTypes.DATE,
+    complianceEntryBy: DataTypes.STRING,
+    complianceTimestamp: DataTypes.DATE,
+    pdEntryBy: DataTypes.STRING,
+    pdTimestamp: DataTypes.DATE,
+
   }, {
     sequelize,
     modelName: 'fabricTracking',
-    tableName: 'fabric_Trackings',
-    timestamps: true // This maps camelCase to snake_case in the DB
+    tableName: 'fabricTrackings',
+    timestamps: true,
   });
 
   return fabricTracking;

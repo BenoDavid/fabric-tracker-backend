@@ -6,7 +6,7 @@ const fabricTrackingRoutes = require('./FabricTrackingRoutes');
 
 
 // // Use routes
-router.use('/ft', fabricTrackingRoutes);
+router.use('/fabrictracking', fabricTrackingRoutes);
 
 
 module.exports = router;
