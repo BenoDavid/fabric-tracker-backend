@@ -30,7 +30,7 @@ app.use(cors({
 
 
 // ------------------ Routes ------------------
-app.use('/api/ft', routes); // Main API routes with watchMan middleware
+app.use('/api/chft', routes); // Main API routes with watchMan middleware
 
 
 // ------------------ Error Handling ------------------
